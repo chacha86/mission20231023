@@ -21,7 +21,7 @@ public class NotebookController {
     public String select(@PathVariable("notebookId") Long notebookId, Model model) {
 
         Notebook notebook = notebookService.getNotebookById(notebookId);
-        List<Notebook> notebookList = notebookService.getNotebookList();
+        List<Notebook> notebookList = notebookService.getParentNotebookList();
 
         model.addAttribute("notebookList", notebookList);
         model.addAttribute("notePageList", notebook.getNotePageList());
@@ -35,7 +35,8 @@ public class NotebookController {
     public String main(Model model) {
 
         List<NotePage> notePageList = notePageService.getNotePageList();
-        List<Notebook> notebookList = notebookService.getNotebookList();
+        List<Notebook> notebookList = notebookService.getParentNotebookList();
+        System.out.println(notebookList.size());
         if(notebookList.isEmpty()) {
             return "redirect:/";
         }
@@ -57,6 +58,13 @@ public class NotebookController {
     public String write() {
         Notebook notebook = notebookService.saveDefaultNotebook();
         notePageService.saveDefaultNotePage(notebook);
-        return "redirect:/";
+        return "redirect:/notebook/" + notebook.getId();
+    }
+
+    @PostMapping("/add-group")
+    public String addGroup(Long notebookId) {
+        Notebook notebook = notebookService.saveGroupNotebook(notebookId);
+        notePageService.saveDefaultNotePage(notebook);
+        return "redirect:/notebook/" + notebook.getId();
     }
 }

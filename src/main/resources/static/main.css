@@ -38,10 +38,14 @@ a{
 }
 
 .selected-item {
-    background: blue;
+    background: lightgrey;
 }
 
 .content {
     background: lightseagreen;
     width:80%;
+}
+
+.group-add {
+    display: inline-block;
 }

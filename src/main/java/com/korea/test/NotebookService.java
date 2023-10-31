@@ -24,12 +24,25 @@ public class NotebookService {
 
         throw new IllegalArgumentException("해당 노트북은 존재하지 않습니다.");
     }
-
-    public Notebook saveDefaultNotebook() {
+    public Notebook getDefaultNotebook() {
         Notebook notebook = new Notebook();
         notebook.setName("새노트");
         notebook.setCreateDate(LocalDateTime.now());
-
+        return notebook;
+    }
+    public Notebook saveDefaultNotebook() {
+        Notebook notebook = getDefaultNotebook();
         return notebookRepository.save(notebook);
+    }
+    public Notebook saveGroupNotebook(Long parentId) {
+
+        Notebook parentNotebook = getNotebookById(parentId);
+        Notebook childNotebook = getDefaultNotebook();
+        childNotebook.setParent(parentNotebook);
+        return notebookRepository.save(childNotebook);
+    }
+
+    public List<Notebook> getParentNotebookList() {
+        return notebookRepository.findByParentId(null);
     }
 }

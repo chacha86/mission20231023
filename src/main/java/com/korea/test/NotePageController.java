@@ -24,7 +24,7 @@ public class NotePageController {
     @RequestMapping("/")
     public String main(Model model) {
         //1. DB에서 데이터 꺼내오기
-        List<Notebook> notebookList = notebookService.getNotebookList();
+        List<Notebook> notebookList = notebookService.getParentNotebookList();
 
         if(notebookList.isEmpty()) {
             notebookService.saveDefaultNotebook();
@@ -59,7 +59,7 @@ public class NotePageController {
     public String detail(Model model, @PathVariable Long id) {
         NotePage notePage = notePageService.getNotePageById(id);
         List<NotePage> notePageList = notePageService.getNotePageListByNotebook(notePage.getNotebook());
-        List<Notebook> notebookList = notebookService.getNotebookList();
+        List<Notebook> notebookList = notebookService.getParentNotebookList();
 
         model.addAttribute("targetPost", notePage);
         model.addAttribute("notePageList", notePageList);

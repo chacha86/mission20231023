@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Notebook {
+public class Notebook { // 하위노트
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,7 +19,14 @@ public class Notebook {
     @Column(nullable = false)
     private LocalDateTime createDate;
 
+
+    @ManyToOne
+    private Notebook parent;
+
     @OneToMany(mappedBy = "notebook")
     private List<NotePage> notePageList;
+
+    @OneToMany(mappedBy = "parent")
+    private List<Notebook> childList;
 
 }
