@@ -90,6 +90,28 @@
             input.form.submit();
         }
     }
+
+    function saveOpenList() {
+            let resultList = document.querySelectorAll("details");
+            let openList = [];
+            resultList.forEach(function (item) {
+                if(item.getAttribute("open") != null) {
+                    openList.push(item.getAttribute("id"));
+                }
+            });
+
+            localStorage.setItem("openList", JSON.stringify(openList));
+            console.log("hihi");
+    }
+    const openList = localStorage.getItem("openList");
+
+    if(openList != null) {
+         openListArr = JSON.parse(openList);
+         openListArr.forEach(function (item) {
+             document.getElementById(item).setAttribute("open", true);
+         });
+    }
+
 </script>
 </body>
 </html>

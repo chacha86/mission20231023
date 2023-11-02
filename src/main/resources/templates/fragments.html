@@ -6,11 +6,11 @@
 </head>
 <body>
 <li th:fragment="tree(targetNotebook, notebookList)" th:each="notebook : ${notebookList}" th:class="${#lists.isEmpty(notebook.childList) and notebook.id == targetNotebook.id} ? 'selected-item' : ''">
-    <a th:href="@{|/notebook/${notebook.id}|}" th:if="${#lists.isEmpty(notebook.childList)}" th:text="${notebook.name}"></a> <!-- 하위 노트가 없는 노트 -->
+    <a th:href="@{|/notebook/${notebook.id}|}" th:if="${#lists.isEmpty(notebook.childList)}" th:text="${notebook.name}" onclick="saveOpenList()"></a> <!-- 하위 노트가 없는 노트 -->
 
     <details th:id="${'d' + notebook.id}" th:unless="${#lists.isEmpty(notebook.childList)}" > <!-- 하위 노트가 있는 노트 -->
         <summary th:class="${notebook.id == targetNotebook.id} ? 'selected-item' : '' ">
-            <a th:href="@{|/notebook/${notebook.id}|}" th:text="${notebook.name}"></a>
+            <a th:href="@{|/notebook/${notebook.id}|}" th:text="${notebook.name}" onclick="saveOpenList()"></a>
         </summary>
         <ul>
             <li th:if="${#lists.isEmpty(notebook.childList)}" th:replace="~{/fragments :: tree(${targetNotebook}, ${notebook.childList})}"></li>

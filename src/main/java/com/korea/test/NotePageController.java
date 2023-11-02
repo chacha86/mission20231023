@@ -52,7 +52,7 @@ public class NotePageController {
     public String write(Long notebookId) {
         Notebook notebook = notebookService.getNotebookById(notebookId);
         notePageService.saveDefaultNotePage(notebook);
-        return "redirect:/";
+        return "redirect:/notebook/" + notebookId;
     }
 
     @GetMapping("/detail/{id}")
