@@ -67,4 +67,10 @@ public class NotebookController {
         notePageService.saveDefaultNotePage(notebook);
         return "redirect:/notebook/" + notebook.getId();
     }
+
+    @PostMapping("/delete")
+    public String delete(Long notebookId) {
+        notebookService.deleteById(notebookId);
+        return "redirect:/";
+    }
 }

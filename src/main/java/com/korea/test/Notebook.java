@@ -23,10 +23,10 @@ public class Notebook { // 하위노트
     @ManyToOne
     private Notebook parent;
 
-    @OneToMany(mappedBy = "notebook")
+    @OneToMany(mappedBy = "notebook", cascade = CascadeType.REMOVE)
     private List<NotePage> notePageList;
 
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE)
     private List<Notebook> childList;
 
 }

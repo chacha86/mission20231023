@@ -36,6 +36,10 @@
                     <input type="hidden" name="notebookId" th:value="${targetNotebook.id}">
                     <input type="submit" value="하위노트추가">
                 </form>
+                <form action="/notebook/delete" method="post">
+                    <input type="hidden" name="notebookId" th:value="${targetNotebook.id}">
+                    <input type="submit" value="삭제">
+                </form>
             </div>
         </div>
         <div class="side-page">

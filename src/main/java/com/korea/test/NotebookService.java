@@ -45,4 +45,8 @@ public class NotebookService {
     public List<Notebook> getParentNotebookList() {
         return notebookRepository.findByParentId(null);
     }
+
+    public void deleteById(Long notebookId) {
+        notebookRepository.deleteById(notebookId);
+    }
 }
