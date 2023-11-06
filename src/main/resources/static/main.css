@@ -49,3 +49,7 @@ a{
 .group-add {
     display: inline-block;
 }
+
+.toast-editor-custom {
+    background: white;
+}
