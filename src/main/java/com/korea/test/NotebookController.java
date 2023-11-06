@@ -73,4 +73,10 @@ public class NotebookController {
         notebookService.deleteById(notebookId);
         return "redirect:/";
     }
+
+    @PostMapping("/update")
+    public String update(Long notebookId, String notebookName) {
+        notebookService.updateName(notebookId, notebookName);
+        return "redirect:/";
+    }
 }

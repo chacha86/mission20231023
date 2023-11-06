@@ -40,6 +40,11 @@
                     <input type="hidden" name="notebookId" th:value="${targetNotebook.id}">
                     <input type="submit" value="삭제">
                 </form>
+                <form action="/notebook/update" method="post">
+                    <input type="hidden" name="notebookId" th:value="${targetNotebook.id}">
+                    <input type="text" name="notebookName" th:value="${targetNotebook.name}">
+                    <input type="submit" value="이름 변경">
+                </form>
             </div>
         </div>
         <div class="side-page">

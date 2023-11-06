@@ -49,4 +49,10 @@ public class NotebookService {
     public void deleteById(Long notebookId) {
         notebookRepository.deleteById(notebookId);
     }
+
+    public void updateName(Long notebookId, String notebookName) {
+        Notebook notebook = getNotebookById(notebookId);
+        notebook.setName(notebookName);
+        notebookRepository.save(notebook);
+    }
 }
