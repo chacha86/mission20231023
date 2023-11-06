@@ -1,4 +1,4 @@
-package com.korea.test;
+package com.korea.test.note;
 
 import jakarta.persistence.*;
 import lombok.Getter;
