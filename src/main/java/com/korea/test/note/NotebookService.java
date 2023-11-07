@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,5 +55,21 @@ public class NotebookService {
         Notebook notebook = getNotebookById(notebookId);
         notebook.setName(notebookName);
         notebookRepository.save(notebook);
+    }
+
+    public List<Notebook> getNotCheckableNotebookList(Notebook notebook, List<Notebook> notCheckableList) {
+        notCheckableList.add(notebook);
+        for(Notebook child : notebook.getChildList()) {
+            getNotCheckableNotebookList(child, notCheckableList);
+        }
+
+        return notCheckableList;
+    }
+
+    public void moveNotebookTo(Long moveNotebookId, Long destinationId) {
+        Notebook moveNotebook = getNotebookById(moveNotebookId);
+        Notebook destNotebook = getNotebookById(destinationId);
+        moveNotebook.setParent(destNotebook);
+        notebookRepository.save(moveNotebook);
     }
 }

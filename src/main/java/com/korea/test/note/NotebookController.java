@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,10 +24,13 @@ public class NotebookController {
         Notebook notebook = notebookService.getNotebookById(notebookId);
         List<Notebook> notebookList = notebookService.getParentNotebookList();
 
+        List<Notebook> notCheckableList = notebookService.getNotCheckableNotebookList(notebook, new ArrayList<>());
+
         model.addAttribute("notebookList", notebookList);
         model.addAttribute("notePageList", notebook.getNotePageList());
         model.addAttribute("targetPost", notebook.getNotePageList().get(0));
         model.addAttribute("targetNotebook", notebook);
+        model.addAttribute("notCheckableList", notCheckableList);
 
         return "main";
 
@@ -78,5 +82,12 @@ public class NotebookController {
     public String update(Long notebookId, String notebookName) {
         notebookService.updateName(notebookId, notebookName);
         return "redirect:/";
+    }
+
+    @PostMapping("/move")
+    public String move(Long moveNotebookId, Long destinationId) {
+        notebookService.moveNotebookTo(moveNotebookId, destinationId);
+        return "redirect:/notebook/" + moveNotebookId;
+
     }
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="/main.css">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet" type="text/css"/>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
@@ -12,14 +12,14 @@
     <div class="logo"><a href="/">logo</a></div>
     <div class="content-wrap">
         <div class="side-notebook">
-<!--            <div th:each="notebook : ${notebookList}" th:unless="${notebook.parent != null}"-->
-<!--                 th:text="${notebook.id + '_' + notebook.name}"></div>-->
-<!--            <div th:each="notebook : ${notebookList}" th:if="${notebook.parent != null}"-->
-<!--                 th:text="${notebook.id + '_' + notebook.name + notebook.parent.id}"></div>-->
-<!--            <div th:each="notebook : ${notebookList}" th:if="${!#lists.isEmpty(notebook.childList)}">-->
-<!--               <div th:each="child : ${notebook.childList}" th:text="${child.id + '_' + child.name}"></div>-->
-<!--            </div>-->
-<!--            <div th:text="${targetNotebook.id}"></div>-->
+            <!--            <div th:each="notebook : ${notebookList}" th:unless="${notebook.parent != null}"-->
+            <!--                 th:text="${notebook.id + '_' + notebook.name}"></div>-->
+            <!--            <div th:each="notebook : ${notebookList}" th:if="${notebook.parent != null}"-->
+            <!--                 th:text="${notebook.id + '_' + notebook.name + notebook.parent.id}"></div>-->
+            <!--            <div th:each="notebook : ${notebookList}" th:if="${!#lists.isEmpty(notebook.childList)}">-->
+            <!--               <div th:each="child : ${notebook.childList}" th:text="${child.id + '_' + child.name}"></div>-->
+            <!--            </div>-->
+            <!--            <div th:text="${targetNotebook.id}"></div>-->
             <!--            <ul>-->
             <!--                <li th:each="notebook : ${notebookList}" th:class="${notebook.id == targetNotebook.id} ? 'selected-item' : '' ">-->
             <!--                    <a th:href="@{|/notebook/${notebook.id}|}" th:text="${notebook.name}"></a>-->
@@ -48,6 +48,28 @@
                 <a href="/member/signup">회원가입</a>
                 <a href="/member/login">로그인</a>
                 <a href="/member/login">로그아웃</a>
+                <button class="btn" onclick="my_modal_4.showModal()">노트 이동</button>
+                <dialog id="my_modal_4" class="modal">
+                    <div class="modal-box">
+                        <h3 class="font-bold text-lg">노트 이동</h3>
+                        <form th:action="@{/notebook/move}" method="post">
+                            <div class="note-tree">
+                                <ul class="menu">
+                                    <li th:replace="~{/fragments :: move_tree(${targetNotebook}, ${notebookList}, ${notCheckableList})}"></li>
+                                </ul>
+                            </div>
+                            <div class="modal-action">
+                                <input type="hidden" name="moveNotebookId" th:value="${targetNotebook.id}">
+                                <button class="btn">이동</button>
+                            </div>
+                        </form>
+                        <div class="modal-action">
+                            <form method="dialog">
+                                <button class="btn">취소</button>
+                            </form>
+                        </div>
+                    </div>
+                </dialog>
             </div>
         </div>
         <div class="side-page">
@@ -74,7 +96,7 @@
                     <input type="text" name="title" th:value="${targetPost.title}">
                 </div>
                 <div class="toast-editor-custom">
-                    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+                    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"/>
                     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
                     <div id="editor"></div>
                     <script>
@@ -85,7 +107,7 @@
                             initialValue: ""
                         });
                     </script>
-<!--                    <textarea name="content" cols="30" rows="10" th:text="${targetPost.content}"></textarea>-->
+                    <!--                    <textarea name="content" cols="30" rows="10" th:text="${targetPost.content}"></textarea>-->
                 </div>
                 <div>
                     <input type="button" value="수정" onclick="updateFormAction(this, ACTIONS_UPDATE)">
@@ -116,24 +138,25 @@
     }
 
     function saveOpenList() {
-            let resultList = document.querySelectorAll("details");
-            let openList = [];
-            resultList.forEach(function (item) {
-                if(item.getAttribute("open") != null) {
-                    openList.push(item.getAttribute("id"));
-                }
-            });
+        let resultList = document.querySelectorAll("details");
+        let openList = [];
+        resultList.forEach(function (item) {
+            if (item.getAttribute("open") != null) {
+                openList.push(item.getAttribute("id"));
+            }
+        });
 
-            localStorage.setItem("openList", JSON.stringify(openList));
-            console.log("hihi");
+        localStorage.setItem("openList", JSON.stringify(openList));
+        console.log("hihi");
     }
+
     const openList = localStorage.getItem("openList");
 
-    if(openList != null) {
-         openListArr = JSON.parse(openList);
-         openListArr.forEach(function (item) {
-             document.getElementById(item).setAttribute("open", true);
-         });
+    if (openList != null) {
+        openListArr = JSON.parse(openList);
+        openListArr.forEach(function (item) {
+            document.getElementById(item).setAttribute("open", true);
+        });
     }
 
 </script>
