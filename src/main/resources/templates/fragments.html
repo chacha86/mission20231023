@@ -14,7 +14,8 @@
     <a th:href="@{|/notebook/${notebook.id}|}" th:if="${noChild}"
        th:text="${notebook.name}" onclick="saveOpenList()"></a> <!-- 하위 노트가 없는 노트 -->
 
-    <details th:id="${'d' + notebook.id}" th:unless="${noChild}" > <!-- 하위 노트가 있는 노트 -->
+    <details th:id="${'d' + notebook.id}" th:unless="${noChild}"
+             th:attr="open=${notebook.id == 27 or notebook.id == 28 or notebook.id == 29 or notebook.id == 31 or notebook.id==26 or notebook.id==47} ? 'true' : 'false'"> <!-- 하위 노트가 있는 노트 -->
         <summary th:class="${notebook.id == targetNotebook.id} ? 'selected-item' : '' ">
             <a th:href="@{|/notebook/${notebook.id}|}" th:text="${notebook.name}" onclick="saveOpenList()"></a>
         </summary>

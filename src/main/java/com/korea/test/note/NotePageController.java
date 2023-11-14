@@ -20,8 +20,7 @@ public class NotePageController {
     }
 
     @RequestMapping("/")
-    public String main(Model model) {
-        //1. DB에서 데이터 꺼내오기
+    public String index(Model model) {
         List<Notebook> notebookList = notebookService.getParentNotebookList();
 
         if(notebookList.isEmpty()) {
@@ -70,7 +69,7 @@ public class NotePageController {
     public String update(Long id, String title, String content) {
         NotePage notePage = notePageService.getNotePageById(id);
 
-        if(title.trim().length() == 0) {
+        if(title.trim().isEmpty()) {
             title = "제목 없음";
         }
 
