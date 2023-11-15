@@ -23,14 +23,45 @@ a{
     display: flex;
 }
 
-.side-menu {
+.side-notebook {
+    background: aqua;
+    width: 10%;
+    text-align: center;
+}
+
+.side-page {
     background: indianred;
     width:10%;
     height:800px;
+    overflow: auto;   /* 컨텐츠가 박스를 벗어나면 스크롤바 표시 */
     text-align: center;
+}
+
+.selected-item {
+    background: lightgrey;
 }
 
 .content {
     background: lightseagreen;
-    width:90%;
+    width:80%;
+}
+
+.group-add {
+    display: inline-block;
+}
+
+.toast-editor-custom {
+    background: white;
+}
+
+.modal-box {
+    height: 70%;
+    width:50%;
+}
+
+.note-tree {
+    height:80%;
+    border: 1px solid black;
+    overflow: auto;
+
 }

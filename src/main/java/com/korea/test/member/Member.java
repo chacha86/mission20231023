@@ -1,4 +1,4 @@
-package com.korea.test;
+package com.korea.test.member;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,15 +10,17 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Setter
 @Getter
-public class Post {
-
+@Setter
+public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private String content;
+
+    private String loginId;
+    private String password;
+    private String name;
+    private String email;
     private LocalDateTime createDate;
 
 }
